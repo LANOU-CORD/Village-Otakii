@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Otakii - Officiel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0d1117;
+            color: white;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* Grille de fond exacte */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 45px 45px;
+            z-index: -1;
+        }
+
+        /* Effets de planètes et flous */
+        .planet { position: absolute; border-radius: 50%; filter: blur(2px); z-index: 1; }
+        .glow-overlay { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; z-index: 0; }
+
+        /* Style des cartes Glassmorphism */
+        .glass-card {
+            background: rgba(21, 26, 33, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+        }
+
+        .btn-neon-pink {
+            background: linear-gradient(90deg, #ff6491, #ff3d77);
+            box-shadow: 0 0 20px rgba(255, 61, 119, 0.5);
+        }
+
+        .btn-neon-blue {
+            background: linear-gradient(90deg, #4da6ff, #2b7fff);
+            box-shadow: 0 0 20px rgba(77, 166, 255, 0.4);
+        }
+
+        /* Scrollbar personnalisée pour les règles */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <div class="glow-overlay w-80 h-80 bg-blue-500 top-20 left-[20%]"></div>
+    <div class="glow-overlay w-64 h-64 bg-pink-500 bottom-20 right-[20%]"></div>
+    
+    <div class="planet w-12 h-12 bg-gradient-to-tr from-blue-400 to-purple-500 top-32 left-[25%] shadow-[0_0_15px_rgba(96,165,250,0.8)]"></div>
+    <div class="planet w-16 h-16 bg-gradient-to-tr from-pink-400 to-orange-400 bottom-40 right-[28%] shadow-[0_0_20px_rgba(244,114,182,0.8)]"></div>
+    <span class="absolute top-40 left-[12%] text-3xl opacity-80">🍥</span>
+    <span class="absolute top-60 right-[15%] text-2xl opacity-80 rotate-12">🌸</span>
+    <span class="absolute bottom-60 left-[10%] text-4xl text-yellow-400 opacity-60">⭐</span>
+
+    <nav class="relative z-50 flex justify-between items-center px-16 py-8">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-[#ffb7c5] rounded-full flex items-center justify-center shadow-lg text-xl">🌸</div>
+            <span class="text-2xl font-extrabold tracking-tight">Village Otakii</span>
+        </div>
+        
+        <div class="flex gap-10 items-center font-bold">
+            <div class="relative">
+                <span class="text-orange-400 cursor-default">Règles</span>
+                <div class="absolute -bottom-1 left-0 w-full h-[2px] bg-orange-400 shadow-[0_0_10px_#fb923c]"></div>
+            </div>
+            <button onclick="toggleModal()" class="text-gray-400 hover:text-pink-400 transition">Demande Partenariat</button>
+        </div>
+
+        <a href="https://discord.gg/WfbAaqZzTm" target="_blank" class="btn-neon-blue px-8 py-2.5 rounded-full font-bold text-white transition transform hover:scale-105">
+            Rejoindre
+        </a>
+    </nav>
+
+    <header class="relative z-10 flex flex-col items-center mt-12 text-center px-4">
+        <div class="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1 rounded-full text-[10px] font-bold text-gray-400 mb-6 backdrop-blur-md">
+            <span class="text-blue-400">💎</span> Village Badge
+        </div>
+        
+        <div class="relative inline-block">
+            <h1 class="text-7xl font-extrabold tracking-tighter mb-2">Village Otakii</h1>
+            <span class="absolute -right-12 top-6 text-pink-400 text-3xl font-normal opacity-90 transform rotate-[-5deg]">おたく</span>
+        </div>
+        
+        <p class="text-lg text-gray-400 mt-2 mb-10">Un Village Otakii sasa rejoindre le Village 🌸</p>
+        
+        <div class="flex gap-4">
+            <a href="https://discord.gg/WfbAaqZzTm" target="_blank" class="btn-neon-pink px-10 py-4 rounded-full font-extrabold text-lg transition hover:brightness-110 flex items-center justify-center">
+                Rejoindre le Village
+            </a>
+            <button class="bg-[#1c2128]/80 border border-white/10 px-10 py-4 rounded-full font-extrabold text-lg hover:bg-white/10 transition">
+                Explorer
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 px-6 pb-20">
+        
+        <div class="glass-card md:col-span-2 p-10 flex flex-col">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl text-orange-400">📜</span>
+                <h2 class="text-3xl font-black italic uppercase tracking-tighter">Règles du Serveur</h2>
+            </div>
+
+            <div class="custom-scroll overflow-y-auto pr-4 max-h-[400px] text-gray-300 leading-relaxed space-y-4 text-sm">
+                <p class="text-pink-400 font-bold text-base">・RÈGLES DU SERVEUR – VILLAGE OTAKII</p>
+                <p><strong>Respect obligatoire :</strong> Traitez tous les membres avec gentillesse et courtoisie.</p>
+                <p><strong>Pas de spam :</strong> Évitez les messages répétitifs, inutiles ou dérangeants.</p>
+                <p><strong>Publicité interdite :</strong> La publicité n’est autorisée que dans les salons prévus ou après accord du staff.</p>
+                <p><strong>Contenu approprié :</strong> Pas de contenu choquant, violent ou illégal.</p>
+                <p><strong>Écouter le staff :</strong> Respectez les décisions du staff pour maintenir la sécurité et la bonne ambiance.</p>
+                <p><strong>Bonne ambiance :</strong> Participez aux discussions et activités avec respect et convivialité.</p>
+                <p><strong>Salons de jeu :</strong> Utilisez correctement les salons de jeux et respectez les règles propres à chaque salon.</p>
+                <p><strong>Partage de contenu :</strong> Les photos, vidéos et créations doivent rester appropriées et respectueuses.</p>
+                <p><strong>Discussions et échanges :</strong> Participez aux discussions de manière constructive et respectueuse. Écoutez les autres et partagez vos idées dans la bonne humeur.</p>
+                <p><strong>Partenariats :</strong> Toute demande de partenariat doit passer par le staff et suivre les règles établies.</p>
+                <p><strong>Rôle et activité :</strong> Les membres doivent rester actifs, participer aux discussions et respecter les rôles attribués.</p>
+                <p class="pt-4 text-white font-semibold">💬 Merci de respecter ces règles pour que le Village Otakii reste un serveur agréable, sûr et amusant pour tous ! 🌸</p>
+            </div>
+        </div>
+
+        <div class="glass-card p-10">
+            <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">Grades</h2>
+            <div class="space-y-6">
+                <div>
+                    <p class="text-pink-400 text-[10px] font-black tracking-widest uppercase mb-4">Membres</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3"><div class="w-3.5 h-3.5 rounded-full bg-blue-400 shadow-[0_0_10px_#60a5fa]"></div><span class="font-bold text-gray-200">Administr</span></div>
+                        <div class="flex items-center gap-3"><div class="w-3.5 h-3.5 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]"></div><span class="font-bold text-gray-200">Administration</span></div>
+                        <div class="flex items-center gap-3"><div class="w-3.5 h-3.5 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></div><span class="font-bold text-gray-200">Modération</span></div>
+                        <div class="flex items-center gap-3"><div class="w-3.5 h-3.5 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div><span class="font-bold text-gray-200">Modération</span></div>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-white/5">
+                    <p class="text-pink-400 text-[10px] font-black tracking-widest uppercase mb-4">Membres</p>
+                    <div class="flex items-center gap-3"><div class="w-3.5 h-3.5 rounded-full bg-pink-400 shadow-[0_0_10px_#f472b6]"></div><span class="font-bold text-gray-200">Membres</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="partenariatModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleModal()"></div>
+        <div class="glass-card w-full max-w-lg p-8 relative z-10 border-pink-500/20 shadow-2xl">
+            <h2 class="text-2xl font-black mb-6 text-pink-400 flex items-center gap-2">🤝 Demande de Partenariat</h2>
+            <form id="partenariatForm" class="space-y-5">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-gray-500 mb-1">Pseudo Discord</label>
+                        <input type="text" id="p_pseudo" required placeholder="Otakii#0001" class="w-full bg-black/50 border border-white/10 p-3 rounded-xl focus:border-pink-500 outline-none transition text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-gray-500 mb-1">Nom du Serveur</label>
+                        <input type="text" id="p_name" required placeholder="Mon Village" class="w-full bg-black/50 border border-white/10 p-3 rounded-xl focus:border-pink-500 outline-none transition text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-1">Lien du serveur</label>
+                    <input type="url" id="p_link" required placeholder="https://discord.gg/invite" class="w-full bg-black/50 border border-white/10 p-3 rounded-xl focus:border-pink-500 outline-none transition text-sm">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-1">Description</label>
+                    <textarea id="p_desc" rows="3" required placeholder="Description rapide..." class="w-full bg-black/50 border border-white/10 p-3 rounded-xl focus:border-pink-500 outline-none transition text-sm"></textarea>
+                </div>
+                <button type="submit" id="sendBtn" class="w-full btn-neon-pink py-4 rounded-xl font-black uppercase tracking-widest hover:scale-[1.02] transition">Envoyer la demande</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="relative z-10 text-center py-12 text-gray-600 text-xs font-bold uppercase tracking-widest">
+        Made with <span class="text-red-500">❤️</span> Village Otakii
+    </footer>
+
+    <script>
+        const hook = "https://discord.com/api/webhooks/1503035841574998067/nyCKbibxote4CZG84QpATx4qdf9qRWvEAT6_-VHNtSnFC0Gt8cLad88CH0sENBTf_g2K";
+
+        function toggleModal() {
+            const m = document.getElementById('partenariatModal');
+            m.classList.toggle('hidden');
+            m.classList.toggle('flex');
+        }
+
+        document.getElementById('partenariatForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('sendBtn');
+            btn.innerText = "ENVOI EN COURS...";
+            btn.disabled = true;
+
+            const payload = {
+                embeds: [{
+                    title: "🤝 Nouveau Partenariat",
+                    color: 16738449,
+                    fields: [
+                        { name: "👤 Pseudo", value: document.getElementById('p_pseudo').value, inline: true },
+                        { name: "🏰 Serveur", value: document.getElementById('p_name').value, inline: true },
+                        { name: "🔗 Lien", value: document.getElementById('p_link').value },
+                        { name: "📝 Description", value: document.getElementById('p_desc').value }
+                    ],
+                    timestamp: new Date()
+                }]
+            };
+
+            try {
+                await fetch(hook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+                alert("Demande envoyée !");
+                toggleModal();
+                e.target.reset();
+            } catch { alert("Erreur d'envoi"); }
+            btn.innerText = "ENVOYER LA DEMANDE";
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>
