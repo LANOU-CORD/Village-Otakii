@@ -7,63 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- DESIGN ORIGINAL CONSERVÉ --- */
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0d1117; 
-            color: white; 
-            overflow-x: hidden; 
-            margin: 0; 
-        }
-
-        .grid-bg { 
-            position: fixed; 
-            inset: 0; 
-            background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), 
-                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); 
-            background-size: 45px 45px; 
-            z-index: -1; 
-        }
-
+        /* --- STYLES CONSERVÉS (NE CHANGE PAS) --- */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d1117; color: white; overflow-x: hidden; margin: 0; scroll-behavior: smooth; }
+        .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 45px 45px; z-index: -1; }
         .planet { position: absolute; border-radius: 50%; filter: blur(2px); z-index: 1; }
         .glow-overlay { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4; z-index: 0; }
-
-        .glass-card { 
-            background: rgba(21, 26, 33, 0.8); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            border-radius: 28px; 
-        }
-
-        .btn-neon-pink { 
-            background: linear-gradient(90deg, #ff6491, #ff3d77); 
-            box-shadow: 0 0 20px rgba(255, 61, 119, 0.5); 
-        }
-
-        .btn-neon-blue { 
-            background: linear-gradient(90deg, #4da6ff, #2b7fff); 
-            box-shadow: 0 0 20px rgba(77, 166, 255, 0.4); 
-        }
-
-        .staff-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            border-radius: 24px;
-        }
-
-        .staff-card:hover { 
-            transform: translateY(-8px); 
-            border-color: #ff6491; 
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 10px 30px -10px rgba(255, 100, 145, 0.2);
-        }
-
+        .glass-card { background: rgba(21, 26, 33, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 28px; }
+        .btn-neon-pink { background: linear-gradient(90deg, #ff6491, #ff3d77); box-shadow: 0 0 20px rgba(255, 61, 119, 0.5); }
+        .btn-neon-blue { background: linear-gradient(90deg, #4da6ff, #2b7fff); box-shadow: 0 0 20px rgba(77, 166, 255, 0.4); }
+        
+        /* --- STYLE DES CARTES STAFF --- */
+        .staff-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; border-radius: 20px; }
+        .staff-item:hover { border-color: #ff6491; background: rgba(255, 255, 255, 0.06); transform: scale(1.02); }
+        .role-badge { font-size: 9px; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+        
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
@@ -74,15 +33,15 @@
     <div class="glow-overlay w-64 h-64 bg-pink-500 bottom-20 right-[20%]"></div>
     <div class="planet w-12 h-12 bg-gradient-to-tr from-blue-400 to-purple-500 top-32 left-[25%] shadow-[0_0_15px_rgba(96,165,250,0.8)]"></div>
     <span class="absolute top-40 left-[12%] text-3xl opacity-80">🍥</span>
-    <span class="absolute bottom-60 left-[10%] text-4xl text-yellow-400 opacity-60">⭐</span>
 
     <nav class="relative z-50 flex justify-between items-center px-16 py-8">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 bg-[#ffb7c5] rounded-full flex items-center justify-center shadow-lg text-xl">🌸</div>
             <span class="text-2xl font-extrabold tracking-tight">Village Otakii</span>
         </div>
-        <div class="hidden md:flex gap-10 items-center font-bold text-sm">
-            <a href="#" class="text-orange-400 border-b-2 border-orange-400">Accueil</a>
+        <div class="flex gap-10 items-center font-bold text-sm">
+            <a href="#" class="text-gray-400 hover:text-white transition">Accueil</a>
+            <a href="#staff-section" class="text-gray-400 hover:text-white transition">Staff</a>
             <button onclick="toggleModal('partenariatModal')" class="text-gray-400 hover:text-pink-400 transition">Partenariat</button>
             <button onclick="toggleModal('staffModal')" class="text-gray-400 hover:text-green-400 transition">Recrutement</button>
         </div>
@@ -91,198 +50,150 @@
 
     <header class="relative z-10 flex flex-col items-center mt-12 text-center px-4">
         <div class="relative inline-block">
-            <h1 class="text-7xl md:text-8xl font-extrabold tracking-tighter mb-2">Village Otakii</h1>
+            <h1 class="text-7xl font-extrabold tracking-tighter mb-2">Village Otakii</h1>
             <span class="absolute -right-12 top-6 text-pink-400 text-3xl font-normal opacity-90 transform rotate-[-5deg]">おたく</span>
         </div>
-        <p class="text-lg text-gray-400 mt-6 mb-10 max-w-2xl">La référence communautaire pour tous les passionnés. Entre dans l'histoire du village. 🌸</p>
-        <div class="flex gap-4">
-            <a href="https://discord.gg/WfbAaqZzTm" target="_blank" class="btn-neon-pink px-12 py-4 rounded-full font-extrabold text-xl transition hover:brightness-110">Rejoindre Discord</a>
-        </div>
+        <p class="text-lg text-gray-400 mt-4 mb-10">La hiérarchie officielle du village et ses protecteurs. 🌸</p>
     </header>
 
-    <main class="relative z-10 max-w-6xl mx-auto px-6 mt-24 pb-20">
+    <main class="relative z-10 max-w-6xl mx-auto px-6 mt-16 pb-20">
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
             <div class="glass-card md:col-span-2 p-10">
-                <h2 class="text-3xl font-black italic uppercase mb-6 flex items-center gap-3"><span class="text-orange-400">📜</span> Règlement Officiel</h2>
-                <div class="custom-scroll overflow-y-auto max-h-[350px] text-gray-300 text-sm space-y-4 pr-4 leading-relaxed">
-                    <p class="text-pink-400 font-bold text-lg underline">SECTION 1 : COMPORTEMENT</p>
-                    <p><strong>1.1 Respect :</strong> Tout manque de respect envers un membre ou un staff sera sanctionné. L'humain avant tout.</p>
-                    <p><strong>1.2 Langage :</strong> Merci de modérer vos propos. Les insultes graves sont proscrites.</p>
-                    <p><strong>1.3 Pseudonymes :</strong> Votre pseudo ne doit pas être offensant ou comporter des caractères invisibles.</p>
-                    
-                    <p class="text-pink-400 font-bold text-lg underline pt-4">SECTION 2 : CONTENU</p>
-                    <p><strong>2.1 Spam :</strong> Le flood (texte, emojis, mentions) est strictement interdit.</p>
-                    <p><strong>2.2 Publicité :</strong> Aucun lien d'invitation Discord n'est toléré en dehors des partenariats officiels.</p>
-                    <p><strong>2.3 Médias :</strong> Les contenus NSFW, violents ou illégaux entraînent un bannissement immédiat.</p>
-
-                    <p class="text-pink-400 font-bold text-lg underline pt-4">SECTION 3 : RÉCLAMATIONS</p>
-                    <p><strong>3.1 Tickets :</strong> Pour toute plainte, utilisez le système de tickets sur Discord.</p>
-                    <p><strong>3.2 Staff :</strong> Les décisions des administrateurs sont sans appel.</p>
-                    
-                    <p class="pt-6 text-white font-semibold italic">🌸 En rejoignant le village, vous acceptez d'être un membre exemplaire.</p>
+                <h2 class="text-3xl font-black italic uppercase mb-6 flex items-center gap-3"><span class="text-orange-400">📜</span> Règlement</h2>
+                <div class="custom-scroll overflow-y-auto max-h-[250px] text-gray-300 text-sm space-y-4 pr-4">
+                    <p class="text-pink-400 font-bold">・RÈGLES DU SERVEUR – VILLAGE OTAKII</p>
+                    <p><strong>Respect obligatoire :</strong> Traitez tous les membres avec gentillesse et courtoisie.</p>
+                    <p><strong>Pas de spam :</strong> Évitez les messages répétitifs ou dérangeants.</p>
+                    <p><strong>Publicité interdite :</strong> Uniquement après accord du staff.</p>
                 </div>
             </div>
-
             <div class="glass-card p-10">
-                <h2 class="text-3xl font-black italic uppercase mb-8">Hiérarchie</h2>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-4 h-4 rounded-full bg-blue-400 shadow-[0_0_10px_#60a5fa]"></div>
-                        <div><p class="font-bold">Fondateur</p><p class="text-[10px] text-gray-500 uppercase font-black">Créateur Suprême</p></div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]"></div>
-                        <div><p class="font-bold">Administration</p><p class="text-[10px] text-gray-500 uppercase font-black">Gestion Globale</p></div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></div>
-                        <div><p class="font-bold">Modération</p><p class="text-[10px] text-gray-500 uppercase font-black">Sécurité & Paix</p></div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-4 h-4 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
-                        <div><p class="font-bold">Animateur</p><p class="text-[10px] text-gray-500 uppercase font-black">Vie du Village</p></div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-4 h-4 rounded-full bg-pink-400 shadow-[0_0_10px_#f472b6]"></div>
-                        <div><p class="font-bold">Membres</p><p class="text-[10px] text-gray-500 uppercase font-black">Citoyens</p></div>
-                    </div>
+                <h2 class="text-3xl font-black italic uppercase mb-8 text-center tracking-tighter">Grades</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-blue-400"></div><span class="text-xs font-bold">Administrateur</span></div>
+                    <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-red-500"></div><span class="text-xs font-bold">Administration</span></div>
+                    <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-purple-500"></div><span class="text-xs font-bold">Modération</span></div>
+                    <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-pink-400"></div><span class="text-xs font-bold">Membres</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="mb-24">
-            <h2 class="text-4xl font-black italic uppercase mb-12 text-center tracking-tighter">👥 L'Équipe du Staff</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">👑</div>
-                    <h3 class="font-bold text-lg">Steeve</h3>
-                    <p class="text-blue-400 text-[10px] font-black uppercase tracking-widest mt-1">Fondateur</p>
-                </div>
-                
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">💎</div>
-                    <h3 class="font-bold text-lg">Staff Admin</h3>
-                    <p class="text-red-500 text-[10px] font-black uppercase tracking-widest mt-1">Administrateur</p>
-                </div>
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">💎</div>
-                    <h3 class="font-bold text-lg">Staff Admin</h3>
-                    <p class="text-red-500 text-[10px] font-black uppercase tracking-widest mt-1">Administrateur</p>
-                </div>
+        <div id="staff-section" class="scroll-mt-24">
+            <h2 class="text-5xl font-black italic uppercase mb-16 text-center tracking-tighter">👥 Hiérarchie du Staff</h2>
 
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">🛡️</div>
-                    <h3 class="font-bold text-lg">Staff Modo</h3>
-                    <p class="text-purple-400 text-[10px] font-black uppercase tracking-widest mt-1">Modérateur</p>
-                </div>
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">🛡️</div>
-                    <h3 class="font-bold text-lg">Staff Modo</h3>
-                    <p class="text-purple-400 text-[10px] font-black uppercase tracking-widest mt-1">Modérateur</p>
-                </div>
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">🛡️</div>
-                    <h3 class="font-bold text-lg">Staff Modo</h3>
-                    <p class="text-purple-400 text-[10px] font-black uppercase tracking-widest mt-1">Modérateur</p>
-                </div>
-
-                <div class="staff-card p-8 text-center">
-                    <div class="text-4xl mb-4">🎈</div>
-                    <h3 class="font-bold text-lg">Staff Anim</h3>
-                    <p class="text-green-400 text-[10px] font-black uppercase tracking-widest mt-1">Animateur</p>
-                </div>
-
-                <div onclick="toggleModal('staffModal')" class="staff-card p-8 text-center border-dashed border-2 border-white/10 cursor-pointer hover:border-green-400 group">
-                    <div class="text-4xl mb-4 text-gray-600 group-hover:text-green-400 transition">+</div>
-                    <h3 class="font-bold text-lg text-gray-500">Postuler</h3>
-                    <p class="text-gray-600 text-[10px] font-black uppercase mt-1">Rejoindre l'équipe</p>
+            <div class="mb-16">
+                <h3 class="text-xl font-bold mb-8 text-blue-400 flex items-center gap-2">👑 Fondateur & Créateur</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="staff-item p-6 flex items-center gap-4">
+                        <div class="text-3xl">👑</div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-none">[ABS] STEEVE</h4>
+                            <p class="text-[10px] text-gray-500">steeve7._.50573</p>
+                            <span class="role-badge bg-blue-600/20 text-blue-400">Fondateur</span>
+                        </div>
+                    </div>
+                    <div class="staff-item p-6 flex items-center gap-4">
+                        <div class="text-3xl">👒</div>
+                        <div>
+                            <h4 class="font-bold text-lg leading-none">Mickey</h4>
+                            <p class="text-[10px] text-gray-500">lanoub2</p>
+                            <span class="role-badge bg-pink-600/20 text-pink-400">Créateur / Responsable</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="glass-card p-10 mb-20">
-            <h2 class="text-3xl font-black italic uppercase mb-10 text-center tracking-tighter">❓ Foire Aux Questions</h2>
-            <div class="space-y-4 max-w-4xl mx-auto">
-                <div class="faq-item pb-4">
-                    <h4 class="font-bold text-pink-400 mb-2">Comment devenir Staff ?</h4>
-                    <p class="text-gray-400 text-sm">Il suffit de remplir le formulaire de recrutement sur ce site. Si votre profil nous intéresse, nous vous contacterons sur Discord.</p>
+            <div class="mb-16">
+                <h3 class="text-xl font-bold mb-8 text-red-500 flex items-center gap-2">🎩 Administration & Responsables</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="staff-item p-6 text-center">
+                        <h4 class="font-bold">Mme Kat kara</h4>
+                        <p class="text-[10px] text-gray-500 mb-2">ines_marlow</p>
+                        <span class="role-badge bg-red-600/20 text-red-400">Responsable / Admin</span>
+                    </div>
+                    <div class="staff-item p-6 text-center border-orange-400/30">
+                        <h4 class="font-bold">Kelly</h4>
+                        <p class="text-[10px] text-gray-500 mb-2">wyatt_halliwell14</p>
+                        <span class="role-badge bg-orange-600/20 text-orange-400">Head of Staff</span>
+                    </div>
+                    <div class="staff-item p-6 text-center">
+                        <h4 class="font-bold">A4c</h4>
+                        <p class="text-[10px] text-gray-500 mb-2">a4c0953</p>
+                        <span class="role-badge bg-red-600/20 text-red-400">Administrateur</span>
+                    </div>
                 </div>
-                <div class="faq-item pb-4">
-                    <h4 class="font-bold text-pink-400 mb-2">Comment faire un partenariat ?</h4>
-                    <p class="text-gray-400 text-sm">Utilisez le bouton "Partenariat" en haut de page. Votre serveur doit avoir une activité minimale pour être accepté.</p>
+            </div>
+
+            <div class="mb-16">
+                <h3 class="text-xl font-bold mb-8 text-purple-500 flex items-center gap-2">⚔️ Équipe de Modération</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="staff-item p-4 text-center">
+                        <h4 class="font-bold text-sm">Blue Cat</h4>
+                        <p class="text-[9px] text-gray-500 mb-2">bluecat05501</p>
+                        <span class="role-badge bg-purple-600/20 text-purple-400">Senior Modo</span>
+                    </div>
+                    <div class="staff-item p-4 text-center">
+                        <h4 class="font-bold text-sm">Ma hé lisse</h4>
+                        <p class="text-[9px] text-gray-500 mb-2">gothomm.y</p>
+                        <span class="role-badge bg-purple-600/20 text-purple-400">Modérateur</span>
+                    </div>
+                    <div class="staff-item p-4 text-center border-blue-400/20">
+                        <h4 class="font-bold text-sm">Mickey</h4>
+                        <p class="text-[9px] text-gray-500 mb-2">lanoub2</p>
+                        <span class="role-badge bg-blue-600/20 text-blue-400">Développeur +</span>
+                    </div>
+                    <div class="staff-item p-4 text-center border-yellow-400/20">
+                        <h4 class="font-bold text-sm">Mme Kat kara</h4>
+                        <p class="text-[9px] text-gray-500 mb-2">ines_marlow</p>
+                        <span class="role-badge bg-yellow-600/20 text-yellow-400">Formatrice</span>
+                    </div>
                 </div>
-                <div class="faq-item pb-4">
-                    <h4 class="font-bold text-pink-400 mb-2">J'ai été banni, que faire ?</h4>
-                    <p class="text-gray-400 text-sm">Les bannissements pour non-respect des règles de sécurité sont définitifs. Pour le reste, contactez un administrateur.</p>
+            </div>
+
+            <div class="mb-16">
+                <h3 class="text-xl font-bold mb-8 text-green-500 flex items-center gap-2">🌸 Guides Otakii</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="staff-item p-4 text-center"><h4 class="font-bold text-xs">Philia</h4><p class="text-[8px] text-gray-500">its_philia</p></div>
+                    <div class="staff-item p-4 text-center"><h4 class="font-bold text-xs">Kix</h4><p class="text-[8px] text-gray-500">misan104</p></div>
+                    <div class="staff-item p-4 text-center"><h4 class="font-bold text-xs">Warum2009</h4><p class="text-[8px] text-gray-500">warum89160</p></div>
+                    <div class="staff-item p-4 text-center"><h4 class="font-bold text-xs">Kelly</h4><p class="text-[8px] text-gray-500">wyatt_halliwell14</p></div>
+                    <div onclick="toggleModal('staffModal')" class="staff-item p-4 text-center border-dashed border-2 cursor-pointer hover:border-green-400">
+                        <h4 class="font-bold text-xs text-green-400">+ Toi ?</h4>
+                        <p class="text-[8px] text-gray-500 font-bold uppercase">Postuler</p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="partenariatModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
-        <div class="glass-card w-full max-w-lg p-10 relative border-pink-500/30">
-            <h2 class="text-2xl font-black mb-6 text-pink-400">🤝 Demande de Partenariat</h2>
-            <form id="partenariatForm" class="space-y-5">
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Identité</label>
-                    <input type="text" id="p_pseudo" placeholder="Ton Pseudo Discord" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 transition">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Nom du projet / serveur</label>
-                    <input type="text" id="p_name" placeholder="Nom du Serveur" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 transition">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Invitation & Description</label>
-                    <textarea id="p_desc" placeholder="Lien d'invitation et présentation rapide..." required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 h-28"></textarea>
-                </div>
-                <button type="submit" id="p_btn" class="w-full btn-neon-pink py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition">Envoyer au Village</button>
-                <button type="button" onclick="toggleModal('partenariatModal')" class="w-full text-[10px] text-gray-500 mt-4 font-black uppercase tracking-widest">Retourner au site</button>
+    <div id="partenariatModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-card w-full max-w-lg p-8 relative">
+            <h2 class="text-2xl font-black mb-6 text-pink-400">🤝 Partenariat</h2>
+            <form id="partenariatForm" class="space-y-4">
+                <input type="text" id="p_pseudo" placeholder="Pseudo Discord" required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-pink-500 transition">
+                <input type="text" id="p_name" placeholder="Nom du Serveur" required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-pink-500 transition">
+                <textarea id="p_desc" placeholder="Description & Lien..." required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-pink-500 h-24"></textarea>
+                <button type="submit" class="w-full btn-neon-pink py-4 rounded-xl font-bold uppercase tracking-widest">Envoyer la demande</button>
+                <button type="button" onclick="toggleModal('partenariatModal')" class="w-full text-xs text-gray-500 mt-4 uppercase">Fermer</button>
             </form>
         </div>
     </div>
 
-    <div id="staffModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
-        <div class="glass-card w-full max-w-lg p-10 relative border-green-500/30">
-            <h2 class="text-2xl font-black mb-6 text-green-400">🛡️ Candidature Staff</h2>
-            <form id="staffForm" class="space-y-5">
+    <div id="staffModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-card w-full max-w-lg p-8 relative">
+            <h2 class="text-2xl font-black mb-6 text-green-400">🛡️ Recrutement Staff</h2>
+            <form id="staffForm" class="space-y-4">
                 <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Pseudo Discord</label>
-                        <input type="text" id="s_pseudo" placeholder="Otakii#0001" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 transition">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Âge réel</label>
-                        <input type="number" id="s_age" placeholder="18" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 transition">
-                    </div>
+                    <input type="text" id="s_pseudo" placeholder="Pseudo Discord" required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-green-500 transition">
+                    <input type="number" id="s_age" placeholder="Âge" required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-green-500 transition">
                 </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Poste souhaité</label>
-                    <select id="s_role" class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 text-gray-400">
-                        <option value="Modérateur">Modérateur</option>
-                        <option value="Animateur">Animateur</option>
-                        <option value="Helper">Helper</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-gray-500 mb-2">Expériences & Motivations</label>
-                    <textarea id="s_motiv" placeholder="Parle-nous de toi et de ton expérience..." required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 h-28"></textarea>
-                </div>
-                <button type="submit" id="s_btn" class="w-full bg-green-600 hover:bg-green-500 py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition">Soumettre ma candidature</button>
-                <button type="button" onclick="toggleModal('staffModal')" class="w-full text-[10px] text-gray-500 mt-4 font-black uppercase tracking-widest">Retourner au site</button>
+                <textarea id="s_motiv" placeholder="Pourquoi devrions-nous te choisir ?" required class="w-full bg-black/50 border border-white/10 p-3 rounded-xl outline-none focus:border-green-500 h-24"></textarea>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-500 py-4 rounded-xl font-bold uppercase tracking-widest shadow-lg shadow-green-900/20">Soumettre ma candidature</button>
+                <button type="button" onclick="toggleModal('staffModal')" class="w-full text-xs text-gray-500 mt-4 uppercase">Fermer</button>
             </form>
         </div>
     </div>
-
-    <footer class="relative z-10 text-center py-20 border-t border-white/5">
-        <div class="flex justify-center gap-3 mb-6">
-            <div class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-pink-500 transition cursor-pointer">✨</div>
-            <div class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-blue-500 transition cursor-pointer">🍥</div>
-            <div class="w-8 h-8 bg-white/5 rounded-full flex items-center justify-center hover:bg-yellow-500 transition cursor-pointer">⭐</div>
-        </div>
-        <p class="text-gray-600 text-[10px] font-black uppercase tracking-[0.4em]">Village Otakii • 2024 • Tous droits réservés</p>
-    </footer>
 
     <script>
         const hook = "https://discord.com/api/webhooks/1503133961549910116/Sq3eliWTY71CByF6mYiGhu5LplT5dqDwWXBULaxwkF7yD0Lv6cYHElE1oUvPU_tjVnud";
@@ -293,71 +204,35 @@
             m.classList.toggle('flex');
         }
 
-        async function sendWebhook(payload) {
-            return fetch(hook, { 
-                method: 'POST', 
-                headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify(payload) 
-            });
+        // Envoi des formulaires via Webhook
+        async function sendWebhook(data) {
+            return fetch(hook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
         }
 
-        // Logic Partenariat
         document.getElementById('partenariatForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('p_btn');
-            btn.innerText = "ENVOI EN COURS...";
-            
-            const payload = { embeds: [{
-                title: "🤝 Nouveau Partenariat",
-                color: 16738449,
-                fields: [
-                    { name: "👤 Pseudo", value: document.getElementById('p_pseudo').value, inline: true },
-                    { name: "🏰 Serveur", value: document.getElementById('p_name').value, inline: true },
-                    { name: "📝 Infos", value: document.getElementById('p_desc').value }
-                ],
-                footer: { text: "Site Officiel Village Otakii" },
-                timestamp: new Date()
-            }]};
-
-            try {
-                await sendWebhook(payload);
-                alert("✅ Ta demande a bien été envoyée au staff !");
-                toggleModal('partenariatModal');
-                e.target.reset();
-            } catch {
-                alert("❌ Erreur lors de l'envoi.");
-            }
-            btn.innerText = "Envoyer au Village";
+            const data = { embeds: [{ title: "🤝 Nouveau Partenariat", color: 16738449, fields: [
+                { name: "Pseudo", value: document.getElementById('p_pseudo').value, inline: true },
+                { name: "Serveur", value: document.getElementById('p_name').value, inline: true },
+                { name: "Infos", value: document.getElementById('p_desc').value }
+            ], timestamp: new Date() }]};
+            await sendWebhook(data);
+            alert("✅ Demande de partenariat envoyée !");
+            toggleModal('partenariatModal');
+            e.target.reset();
         });
 
-        // Logic Recrutement
         document.getElementById('staffForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('s_btn');
-            btn.innerText = "ENVOI EN COURS...";
-
-            const payload = { embeds: [{
-                title: "🛡️ Nouvelle Candidature Staff",
-                color: 5763719,
-                fields: [
-                    { name: "👤 Pseudo", value: document.getElementById('s_pseudo').value, inline: true },
-                    { name: "🎂 Âge", value: document.getElementById('s_age').value, inline: true },
-                    { name: "📍 Poste", value: document.getElementById('s_role').value },
-                    { name: "💡 Motivations", value: document.getElementById('s_motiv').value }
-                ],
-                footer: { text: "Système de Recrutement Automatisé" },
-                timestamp: new Date()
-            }]};
-
-            try {
-                await sendWebhook(payload);
-                alert("✅ Candidature transmise avec succès !");
-                toggleModal('staffModal');
-                e.target.reset();
-            } catch {
-                alert("❌ Erreur de connexion.");
-            }
-            btn.innerText = "Soumettre ma candidature";
+            const data = { embeds: [{ title: "🛡️ Candidature Staff", color: 5763719, fields: [
+                { name: "Pseudo", value: document.getElementById('s_pseudo').value, inline: true },
+                { name: "Âge", value: document.getElementById('s_age').value, inline: true },
+                { name: "Motivations", value: document.getElementById('s_motiv').value }
+            ], timestamp: new Date() }]};
+            await sendWebhook(data);
+            alert("✅ Candidature envoyée au staff !");
+            toggleModal('staffModal');
+            e.target.reset();
         });
     </script>
 </body>
