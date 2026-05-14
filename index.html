@@ -3,71 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Village Otakii - Maintenance</title>
+    <title>Village Otakii - Officiel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d1117; color: white; overflow: hidden; margin: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0d1117; color: white; overflow-x: hidden; margin: 0; scroll-behavior: smooth; }
+        
+        /* FOND D'ORIGINE */
         .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 45px 45px; z-index: -1; }
-        .glow-overlay { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: 0; }
+        .glow-overlay { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: 0; pointer-events: none; }
+        .planet { position: absolute; border-radius: 50%; filter: blur(1px); z-index: 1; animation: float 6s ease-in-out infinite; }
         
-        /* Animation de flottement pour l'icône */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
-        .floating { animation: float 3s ease-in-out infinite; }
+
+        .glass-card { background: rgba(21, 26, 33, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 28px; }
+        .btn-neon-pink { background: linear-gradient(90deg, #ff6491, #ff3d77); box-shadow: 0 0 20px rgba(255, 61, 119, 0.5); }
+        .btn-neon-blue { background: linear-gradient(90deg, #4da6ff, #2b7fff); box-shadow: 0 0 20px rgba(77, 166, 255, 0.4); }
         
-        .maintenance-card {
-            background: rgba(21, 26, 33, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
-            padding: 3rem;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
+        .staff-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; border-radius: 20px; }
+        .staff-item:hover { border-color: #ff6491; background: rgba(255, 255, 255, 0.06); transform: translateY(-5px); }
+        
+        .role-badge { font-size: 9px; font-weight: 900; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; margin-right: 2px; }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
-
+<body>
     <div class="grid-bg"></div>
 
-    <!-- Effets visuels d'arrière-plan -->
-    <div class="glow-overlay w-96 h-96 bg-blue-600 -top-20 -left-20"></div>
-    <div class="glow-overlay w-96 h-96 bg-pink-600 -bottom-20 -right-20"></div>
+    <div class="glow-overlay w-[500px] h-[500px] bg-blue-600/30 top-[-10%] left-[-10%]"></div>
+    <div class="glow-overlay w-[400px] h-[400px] bg-pink-600/20 bottom-[-5%] right-[-5%]"></div>
+    <div class="planet w-16 h-16 bg-gradient-to-tr from-blue-400 to-indigo-600 top-32 left-[15%] shadow-[0_0_30px_rgba(96,165,250,0.4)]"></div>
+    <div class="planet w-10 h-10 bg-gradient-to-tr from-pink-400 to-purple-600 bottom-48 right-[12%] shadow-[0_0_20px_rgba(244,114,182,0.3)]" style="animation-delay: -2s;"></div>
+    <span class="absolute top-48 right-[20%] text-5xl opacity-20 select-none">⛩️</span>
+    <span class="absolute bottom-20 left-[10%] text-4xl opacity-20 select-none">🍥</span>
 
-    <div class="maintenance-card shadow-2xl">
-        <div class="floating text-6xl mb-6">🌸</div>
-        <h1 class="text-4xl font-extrabold tracking-tighter mb-4">Village Otakii</h1>
-        
-        <div class="h-1 w-20 bg-pink-500 mx-auto mb-6 rounded-full"></div>
-        
-        <h2 class="text-xl font-bold text-gray-200 mb-2">Site en Maintenance</h2>
-        <p class="text-gray-400 text-sm leading-relaxed mb-8">
-            Le village subit actuellement quelques travaux de rénovation. Nous revenons très bientôt avec de nouvelles fonctionnalités !
-        </p>
+    <nav class="relative z-50 flex justify-between items-center px-12 py-8">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-[#ffb7c5] rounded-full flex items-center justify-center shadow-lg text-xl">🌸</div>
+            <span class="text-2xl font-extrabold tracking-tighter">Village Otakii</span>
+        </div>
+        <div class="hidden md:flex gap-10 items-center font-bold text-sm">
+            <a href="#" class="text-gray-400 hover:text-white transition">Accueil</a>
+            <a href="#staff-section" class="text-gray-400 hover:text-white transition">Staff</a>
+            <button onclick="toggleModal('partenariatModal')" class="text-gray-400 hover:text-pink-400 transition">Partenariat</button>
+            <button onclick="toggleModal('staffModal')" class="text-gray-400 hover:text-green-400 transition">Recrutement</button>
+        </div>
+        <a href="https://discord.gg/WfbAaqZzTm" target="_blank" class="btn-neon-blue px-8 py-2.5 rounded-full font-bold transition transform hover:scale-105">Discord</a>
+    </nav>
 
-        <div class="space-y-4">
-            <div class="bg-white/5 border border-white/10 py-3 px-4 rounded-2xl text-xs font-medium text-pink-400 uppercase tracking-widest">
-                Durée : Indéterminée
+    <header class="relative z-10 flex flex-col items-center mt-20 text-center px-4">
+        <div class="relative inline-block">
+            <h1 class="text-8xl font-black tracking-tighter mb-4">Village Otakii</h1>
+            <span class="absolute -right-16 top-10 text-pink-400 text-4xl font-normal opacity-90 transform rotate-[-8deg] pointer-events-none">おたく</span>
+        </div>
+        <p class="text-xl text-gray-400 max-w-2xl">L'espace officiel dédié à la communauté et à l'équipe du village. 🌸</p>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 mt-24 pb-32">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-32">
+            <div class="glass-card lg:col-span-2 p-10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10 text-8xl">📜</div>
+                <h2 class="text-3xl font-black italic uppercase mb-8 flex items-center gap-3">Règlement intérieur</h2>
+                <div class="custom-scroll overflow-y-auto max-h-[280px] text-gray-300 space-y-5 pr-4 leading-relaxed">
+                    <p class="text-pink-400 font-bold border-l-4 border-pink-500 pl-4"># ARTICLE 1 : RESPECT</p>
+                    <p>Le respect d'autrui est primordial. Aucune forme d'insulte, de discrimination ou de harcèlement ne sera tolérée au sein du village.</p>
+                    <p class="text-blue-400 font-bold border-l-4 border-blue-500 pl-4"># ARTICLE 2 : CONTENU</p>
+                    <p>Le spam, les liens malveillants et le contenu NSFW sont strictement interdits dans les canaux publics.</p>
+                </div>
             </div>
             
-            <a href="https://discord.gg/WfbAaqZzTm" target="_blank" 
-               class="block w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl transition duration-300 shadow-lg shadow-blue-900/20">
-                Rejoindre le Discord
-            </a>
+            <div class="glass-card p-10 flex flex-col items-center justify-center">
+                <h2 class="text-2xl font-black italic uppercase mb-10 tracking-widest text-gray-500 text-center">Grades Officiels</h2>
+                <div class="space-y-6 w-full">
+                    <div class="flex items-center gap-4 group cursor-default">
+                        <div class="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                        <span class="text-xs font-black uppercase tracking-widest group-hover:text-blue-400 transition">Administration</span>
+                    </div>
+                    <div class="flex items-center gap-4 group cursor-default">
+                        <div class="w-4 h-4 rounded-full bg-red-600 shadow-[0_0_10px_rgba(220,38,38,0.5)]"></div>
+                        <span class="text-xs font-black uppercase tracking-widest group-hover:text-red-400 transition">Responsable</span>
+                    </div>
+                    <div class="flex items-center gap-4 group cursor-default">
+                        <div class="w-4 h-4 rounded-full bg-purple-600 shadow-[0_0_10px_rgba(147,51,234,0.5)]"></div>
+                        <span class="text-xs font-black uppercase tracking-widest group-hover:text-purple-400 transition">Modération</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <p class="mt-8 text-[10px] text-gray-500 uppercase tracking-widest">
-            Merci de votre patience, les ninjas.
-        </p>
+        <div id="staff-section" class="scroll-mt-32">
+            <div class="flex flex-col items-center mb-20">
+                <h2 class="text-6xl font-black italic uppercase tracking-tighter">L'ÉQUIPE DU STAFF</h2>
+                <div class="w-24 h-1.5 bg-pink-500 mt-4 rounded-full"></div>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-xl font-black mb-10 text-blue-400 uppercase tracking-widest border-b border-white/5 pb-4">👑 Fondation</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="staff-item p-8 flex items-center gap-6">
+                        <div class="text-4xl filter drop-shadow-lg">👑</div>
+                        <div>
+                            <h4 class="font-bold text-xl leading-none">[ABS] STEEVE</h4>
+                            <span class="role-badge bg-blue-600/20 text-blue-400">Fondateur</span>
+                        </div>
+                    </div>
+                    <div class="staff-item p-8 flex items-center gap-6">
+                        <div class="text-4xl filter drop-shadow-lg">🔨</div>
+                        <div>
+                            <h4 class="font-bold text-xl leading-none">Kelly</h4>
+                            <span class="role-badge bg-blue-600/20 text-blue-400">Co Fondateur / Builder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-xl font-black mb-10 text-red-500 uppercase tracking-widest border-b border-white/5 pb-4">🎩 Administration</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold text-lg italic">Mme Kat kara</h4>
+                        <div class="flex flex-wrap justify-center gap-1 mt-4">
+                            <span class="role-badge bg-red-600/20 text-red-400">Responsable</span>
+                            <span class="role-badge bg-blue-600/20 text-blue-400">Administrateur</span>
+                            <span class="role-badge bg-yellow-600/20 text-yellow-400">Formatrice</span>
+                        </div>
+                    </div>
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold text-lg italic">A4c</h4>
+                        <span class="role-badge bg-blue-600/20 text-blue-400 mt-4">Administrateur</span>
+                    </div>
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold text-lg italic">Mickey</h4>
+                        <div class="flex flex-wrap justify-center gap-1 mt-4">
+                            <span class="role-badge bg-blue-600/20 text-blue-400">Développeur +</span>
+                            <span class="role-badge bg-green-600/20 text-green-400">Creator / Responsable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-xl font-black mb-10 text-purple-500 uppercase tracking-widest border-b border-white/5 pb-4">⚔️ Modération</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold">Blue Cat</h4>
+                        <span class="role-badge bg-purple-600/20 text-purple-400 mt-4">Senior Modo</span>
+                    </div>
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold">Mme Kat kara</h4>
+                        <span class="role-badge bg-purple-600/20 text-purple-400 mt-4">Senior Modo</span>
+                    </div>
+                    <div class="staff-item p-8 text-center">
+                        <h4 class="font-bold">Ma hé lisse</h4>
+                        <span class="role-badge bg-purple-600/20 text-purple-400 mt-4">Modérateur</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <h3 class="text-xl font-black mb-10 text-green-500 uppercase tracking-widest border-b border-white/5 pb-4">🌸 Guides du Village</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="staff-item p-6 text-center">
+                        <h4 class="font-bold text-sm uppercase">Philia</h4>
+                        <span class="role-badge bg-green-600/20 text-green-400">Guide</span>
+                    </div>
+                    <div class="staff-item p-6 text-center">
+                        <h4 class="font-bold text-sm uppercase">Kix</h4>
+                        <span class="role-badge bg-green-600/20 text-green-400">Guide</span>
+                    </div>
+                    <div class="staff-item p-6 text-center">
+                        <h4 class="font-bold text-sm uppercase">Prisca ❤️</h4>
+                        <span class="role-badge bg-green-600/20 text-green-400">Guide</span>
+                    </div>
+                    <div onclick="toggleModal('staffModal')" class="staff-item p-6 text-center border-dashed border-2 cursor-pointer hover:border-green-400 flex flex-col items-center justify-center group">
+                        <span class="text-xs font-black text-green-400 group-hover:scale-110 transition">+ RECRUTEMENT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="partenariatModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
+        <div class="glass-card w-full max-w-xl p-10">
+            <h2 class="text-3xl font-black mb-8 text-pink-400 uppercase tracking-tighter">🤝 Partenariat</h2>
+            <form id="partenariatForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="p_pseudo" placeholder="Ton Pseudo" required class="bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 text-white">
+                    <input type="text" id="p_name" placeholder="Nom du Serveur" required class="bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 text-white">
+                </div>
+                <textarea id="p_desc" placeholder="Lien d'invitation et petite présentation..." required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-pink-500 h-32 text-white"></textarea>
+                <button type="submit" class="w-full btn-neon-pink py-5 rounded-2xl font-black uppercase tracking-widest transform transition hover:scale-[1.02]">Envoyer la demande</button>
+                <button type="button" onclick="toggleModal('partenariatModal')" class="w-full text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Annuler et fermer</button>
+            </form>
+        </div>
     </div>
 
-    <!-- Le reste du code est masqué/inactif pendant la maintenance -->
+    <div id="staffModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
+        <div class="glass-card w-full max-w-xl p-10">
+            <h2 class="text-3xl font-black mb-8 text-green-400 uppercase tracking-tighter">🛡️ Candidature Staff</h2>
+            <form id="staffForm" class="space-y-6">
+                <input type="text" id="s_pseudo" placeholder="Pseudo Discord (ex: steeve#0000)" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 text-white">
+                <textarea id="s_motiv" placeholder="Pourquoi souhaites-tu rejoindre l'équipe ?" required class="w-full bg-black/40 border border-white/10 p-4 rounded-2xl outline-none focus:border-green-500 h-40 text-white"></textarea>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-500 py-5 rounded-2xl font-black uppercase tracking-widest transform transition hover:scale-[1.02] shadow-lg shadow-green-900/20">Soumettre au village</button>
+                <button type="button" onclick="toggleModal('staffModal')" class="w-full text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Annuler et fermer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const hookRecrutement = "https://discord.com/api/webhooks/1503133961549910116/Sq3eliWTY71CByF6mYiGhu5LplT5dqDwWXBULaxwkF7yD0Lv6cYHElE1oUvPU_tjVnud";
+        const hookPartenariat = "https://discord.com/api/webhooks/1503116393091039234/-qv4tosRGDdr1RCnAqEmB-9_c1IZuv4h1uYUMV0gZFoqtUbwr-UHZYKF57t3PDmTr6zx";
+
+        function toggleModal(id) {
+            const m = document.getElementById(id);
+            if(m.classList.contains('hidden')) {
+                m.classList.remove('hidden');
+                m.classList.add('flex');
+            } else {
+                m.classList.add('hidden');
+                m.classList.remove('flex');
+            }
+        }
+
+        // Gestion Partenariat
+        document.getElementById('partenariatForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = { embeds: [{ 
+                title: "🤝 Demande de Partenariat", 
+                color: 16738449, 
+                fields: [
+                    { name: "Demandeur", value: document.getElementById('p_pseudo').value, inline: true }, 
+                    { name: "Serveur", value: document.getElementById('p_name').value, inline: true }, 
+                    { name: "Description", value: document.getElementById('p_desc').value }
+                ], 
+                timestamp: new Date() 
+            }]};
+            await fetch(hookPartenariat, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+            alert("✨ Ta demande de partenariat a été transmise !");
+            toggleModal('partenariatModal');
+            e.target.reset();
+        });
+
+        // Gestion Recrutement
+        document.getElementById('staffForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = { embeds: [{ 
+                title: "🛡️ Nouvelle Candidature Staff", 
+                color: 5763719, 
+                fields: [
+                    { name: "Pseudo Discord", value: document.getElementById('s_pseudo').value, inline: true }, 
+                    { name: "Motivation", value: document.getElementById('s_motiv').value }
+                ], 
+                timestamp: new Date() 
+            }]};
+            await fetch(hookRecrutement, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+            alert("🛡️ Candidature envoyée avec succès !");
+            toggleModal('staffModal');
+            e.target.reset();
+        });
+    </script>
 </body>
 </html>
